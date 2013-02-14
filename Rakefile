@@ -1,33 +1,4 @@
 #coding:utf-8
-#
-# 注意点
-# ~/Git/
-
-# githubユーザ名
-#
-USER = "itcvimmer"
-
-# ユーザの持つレポジトリ名リスト
-#
-REPOS = %w(dotfiles .vim)
-
-# git cloneする場所
-#
-CHECKOUT_DIR = "#{ENV['HOME']}/Git"
-
-# レポジトリ名とパスワードを指定してクローンします。
-#
-def git_clone_command(repository_name, password)
-  rm_r repository_name if File.exist? repository_name
-  "git clone http://#{USER}:#{password}@github.com/#{USER}/#{repository_name}.git"
-end
-
-# メッセージを表示してEXITします。
-#
-def exit_with_message(message)
-  p message
-  exit 1
-end
 
 # Shougoさんのneobundleプラグインをクローンします。
 #
@@ -53,20 +24,13 @@ def mkcd(path)
   end
 end
 
-desc "ビムビムします"
-task :vimvim do
-  output_path = "/tmp"#ENV['HOME']
-  pw = ENV['password'] || exit_with_message("passwordオプション指定してちょ")
+desc "vimの共通設定をします。"
+task :set_common do
+  [
+    {src: ".vimrc", dist: "#{ENV['HOME']}/.vimrc"},
+    {src: ".vim",   dist: "#{ENV['HOME']}/.vim"},
+  ].each{|_| ln_sf _[:src], _[:dist]}
 
-  mkcd CHECKOUT_DIR do
-    REPOS.each{|_| sh git_clone_command(_, pw)}
-
-    [
-      {src: "#{CHECKOUT_DIR}/dotfiles/.vimrc", dist: "#{output_path}/.vimrc"},
-      {src: "#{CHECKOUT_DIR}/.vim",            dist: "#{output_path}/.vim"},
-    ].each{|_| ln_sf _[:src], _[:dist]}
-
-    clone_neobundle_plugin("#{output_path}/.vim/bundle")
-    sh NeoBundleInstall("#{output_path}/.vimrc")
-  end
+  clone_neobundle_plugin("#{ENV['HOME']}/.vim/bundle")
+  sh NeoBundleInstall("#{ENV['HOME']}/.vimrc")
 end
