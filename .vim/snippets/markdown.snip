@@ -1,0 +1,17 @@
+snippet span
+alias   red
+abbr    * <span style="color:red;"></span>
+        * <span style="color:red;">${0}</span>
+
+
+snippet octo
+alias   octopress
+abbr    octopress blog
+        ---
+        layout: post
+        title: "${1}"
+        date: `strftime("%Y-%m-%d %H:%M")`
+        comments: true
+        categories:
+        ---
+        ${0}

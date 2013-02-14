@@ -1,0 +1,211 @@
+snippet des
+abbr    describe "xxx" ~ end
+prev_word '^'
+        describe "${1:xxx}" do
+          ${0}
+        end
+
+snippet dest
+abbr    describe Type ~ end
+prev_word '^'
+        describe ${1:Type} do
+          ${0}
+        end
+
+snippet dests
+abbr    describe Type "xxx" ~ end
+prev_word '^'
+        describe ${1:Type} "${2:xxx}" do
+          ${0}
+        end
+
+snippet desm
+abbr    describe "#xxxは、" ~ end
+prev_word '^'
+        describe "#${1:xxx}は、" do
+          ${0}
+        end
+
+snippet descm
+abbr    describe ".xxxは、" ~ end
+prev_word '^'
+        describe ".${1:xxx}は、" do
+          ${0}
+        end
+
+snippet con
+abbr    context "xxx" do ~ end
+        context "${1}" do
+          ${0}
+        end
+
+snippet conx
+abbr    context "かつ、xxx" do ~ end
+        context "かつ、${1}" do
+          ${0}
+        end
+
+snippet it
+abbr    it "xxx" do ~ end
+        it "${1}" do
+          ${0}
+        end
+
+snippet bef
+alias   before
+abbr    before do ~ end
+        before(:each) do
+          ${0}
+        end
+
+snippet aft
+alias   after
+abbr    after do ~ end
+        after do
+          ${0}
+        end
+
+snippet le
+alias   let
+abbr    let(:var_name){value}
+        let(:${1:name}){${2:value}}${0}
+
+snippet sh=
+options word
+abbr    should == xxx
+        should == ${0}
+
+snippet shn=
+options word
+abbr    should_not == xxx
+        should_not == ${0}
+
+snippet shbt
+options word
+abbr    should be_true
+        should be_true${0}
+
+snippet shnbt
+options word
+abbr    should_not be_true
+        should_not be_true${0}
+
+snippet shbf
+options word
+abbr    should be_false
+        should be_false${0}
+
+snippet shnbf
+options word
+abbr    should_not be_false
+        should_not be_false${0}
+
+snippet shbv
+options word
+abbr    should be_valid
+        should be_valid${0}
+
+snippet shnbv
+options word
+abbr    should_not be_valid
+        should_not be_valid${0}
+
+snippet shbn
+options word
+abbr    should be_nil
+        should be_nil${0}
+
+snippet shnbn
+options word
+abbr    should_not be_nil
+        should_not be_nil${0}
+
+snippet shbb
+options word
+abbr    should be_blank
+        should be_blank${0}
+
+snippet shnbb
+options word
+abbr    should_not be_blank
+        should_not be_blank${0}
+
+snippet shbe
+options word
+abbr    should be_empty
+        should be_empty${0}
+
+snippet shnbe
+options word
+abbr    should_not be_empty
+        should_not be_empty${0}
+
+snippet shbio
+options word
+abbr    should be_isntance_of(xxx)
+        should be_instance_of(${0})
+
+snippet shnbio
+options word
+abbr    should_not be_isntance_of(xxx)
+        should_not be_instance_of(${0})
+
+snippet shre
+options word
+abbr    should raise_error(xxx)
+        should raise_error(${0})
+
+snippet shnre
+options word
+abbr    should_not raise_error(xxx)
+        should_not raise_error(${0})
+
+snippet shr
+options word
+abbr    should receive(xxx)
+        should_receive(:${0})
+
+snippet shnr
+options word
+abbr    should_not receive(xxx)
+        should_not_receive(:${0})
+
+snippet wia
+options word
+alias   with
+abbr    with(xxx)
+        with(${0:args})
+
+snippet on
+options word
+abbr    once
+        once${0}
+
+snippet tw
+options word
+abbr    twice
+        twice${0}
+
+snippet atl
+options word
+alias   at_most
+abbr    at_least(xxx).times
+        at_least(${0}).times
+
+snippet atm
+options word
+alias   at_most
+abbr    at_most(xxx).times
+        at_most(${0}).times
+
+snippet anr
+options word
+alias   and_return
+abbr    and_return(xxx)
+        and_return(${0})
+
+snippet anra
+options word
+alias   and_raise
+abbr    and_raise(xxx)
+        and_raise(${0})

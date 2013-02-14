@@ -1,0 +1,34 @@
+snippet con
+alias   console
+abbr    console.log(XXX)
+        console.log(${0});
+
+snippet fn
+alias   func function
+abbr    function(){}
+        function(${1}){
+          ${0}
+        }
+
+snippet var
+abbr    var ${1} = ${0};
+        var ${1} = ${0};
+
+snippet =
+abbr    = {}
+        = {
+          ${0}
+        }
+
+snippet :,
+abbr    x: function(){},
+        ${1}: function(${2}){
+          ${3}
+        },
+        ${0}
+
+snippet :
+abbr    x: function(){},
+        ${1}: function(${2}){
+          ${0}
+        }

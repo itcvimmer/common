@@ -1,0 +1,40 @@
+snippet ::1
+abbr    :: Type
+        :: ${1:Type}
+
+snippet ::2
+abbr    :: Type -> Type
+        :: ${1:Type} -> ${2:Type}
+
+snippet ::3
+abbr    :: Type -> Type -> Type
+        :: ${1:Type} -> ${2:Type} -> ${3:Type}
+
+snippet ::4
+abbr    :: Type -> Type -> Type -> Type
+        :: ${1:Type} -> ${2:Type} -> ${3:Type} -> ${4:Type}
+
+snippet ::5
+abbr    :: Type -> Type -> Type -> Type
+        :: ${1:Type} -> ${2:Type} -> ${3:Type} -> ${4:Type} -> ${5:Type}
+
+snippet ch
+alias   char
+abbr    Char
+        Char
+
+snippet st
+alias   string
+abbr    String
+        String
+
+snippet im
+alias   imp
+abbr    import module
+        import ${0}
+
+snippet ma
+alias   main
+abbr    main = print $
+        main :: IO ()
+        main = print $ 

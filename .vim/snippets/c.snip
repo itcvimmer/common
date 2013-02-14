@@ -1,0 +1,36 @@
+#
+#= c言語用のスニペットです。
+#
+snippet main
+abbr    メイン関数
+        int
+        main(int argc, char *argv[])
+        {
+            ${0}
+        }
+
+snippet rt
+alias   return
+abbr    return n;
+        return ${0};
+
+snippet rt0
+abbr    return 0;
+        return 0;
+
+snippet rt1
+abbr    return 1;
+        return 1;
+
+snippet ex
+alias   exit
+abbr    exit(n);
+        exit(${0});
+
+snippet ex0
+abbr    exit(0);
+        exit(0);
+
+snippet ex1
+abbr    exit(1);
+        exit(1);
