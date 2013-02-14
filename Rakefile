@@ -26,10 +26,13 @@ end
 
 desc "vimの共通設定をします。"
 task :set_common do
+  _pwd = pwd
   [
-    {src: ".vimrc", dist: "#{ENV['HOME']}/.vimrc"},
-    {src: ".vim",   dist: "#{ENV['HOME']}/.vim"},
+    {src: "#{_pwd}/.vimrc", dist: "#{ENV['HOME']}/.vimrc"},
+    {src: "#{_pwd}/.vim",   dist: "#{ENV['HOME']}/.vim"},
   ].each{|_| ln_sf _[:src], _[:dist]}
+
+  touch "#{ENV['HOME']}/.vimrc.local"
 
   clone_neobundle_plugin("#{ENV['HOME']}/.vim/bundle")
   sh NeoBundleInstall("#{ENV['HOME']}/.vimrc")
