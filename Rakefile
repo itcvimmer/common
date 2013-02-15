@@ -37,3 +37,13 @@ task :set_common do
   clone_neobundle_plugin("#{ENV['HOME']}/.vim/bundle")
   sh NeoBundleInstall("#{ENV['HOME']}/.vimrc")
 end
+
+desc "rvmインストール"
+task :install_rvm do
+  cd ENV['HOME'] do
+    sh "git clone --depth 1 git://github.com/wayneeseguin/rvm.git"
+    cd "rvm" do
+      sh "./install"
+    end
+  end
+end
