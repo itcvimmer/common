@@ -24,6 +24,12 @@ def mkcd(path)
   end
 end
 
+# wgetして標準出力に出力します
+#
+def wgetp(path)
+  "wget -q -O - #{path}"
+end
+
 desc "vimの共通設定をします。"
 task :set_common do
   _pwd = pwd
@@ -44,6 +50,14 @@ task :install_rvm do
     sh "git clone --depth 1 git://github.com/wayneeseguin/rvm.git"
     cd "rvm" do
       sh "./install"
+      sh "source ~/.rvm/scripts/rvm"
     end
+  end
+end
+
+namespace :daichi do
+  desc "zshrc上書き"
+  task :write_zshrc do
+    sh wgetp("https://raw.github.com/da1hk/dotfiles/master/.zshrc") + " >> #{ENV['HOME']}/.zshrc"
   end
 end
