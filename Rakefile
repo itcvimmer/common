@@ -28,8 +28,8 @@ desc "vimの共通設定をします。"
 task :set_common do
   _pwd = pwd
   [
-    {src: "#{_pwd}/.vimrc", dist: "#{ENV['HOME']}/.vimrc"},
-    {src: "#{_pwd}/.vim",   dist: "#{ENV['HOME']}/.vim"},
+    {:src => "#{_pwd}/.vimrc", :dist => "#{ENV['HOME']}/.vimrc"},
+    {:src => "#{_pwd}/.vim",   :dist => "#{ENV['HOME']}/.vim"},
   ].each{|_| ln_sf _[:src], _[:dist]}
 
   touch "#{ENV['HOME']}/.vimrc.local"
