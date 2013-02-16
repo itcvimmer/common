@@ -161,6 +161,36 @@ namespace :install do
   # end
 end
 
+namespace :centos do
+  namespace :install do
+    #TODO
+    # desc "ctags"
+    # task :ctags do
+    #   sh "rpm -qa | grep ctags"
+    #   sh "wget http://prdownloads.sourceforge.net/ctags/ctags-5.8-1.src.rpm"
+    #   sh "yum remove ctags"
+    #   sh "rpmbuild --rebuild ctags-5.8-1.src.rpm"
+    #   sh "rpm -ivh /usr/src/redhat/RPMS/x86_64/ctags-5.8-1.x86_64.rpm"
+    #   # sh "rpm -ivh /usr/src/redhat/RPMS/i386/ctags-5.8-1.i386.rpm"
+    #   sh "rpm -qa | grep ctags"
+    # end
+
+    #TODO
+    # desc "vim"
+    # tasi :vim do
+    #   sh "yum -y remove vim vim-enhanced"
+    #   sh "yum -y install hg"
+    #   sh "yum -y install ncurses-devel"
+    #   sh "mkdir -p ~/src"
+    #   sh "hg clone https://vim.googlecode.com/hg/ ~/src/vim"
+    #   sh "cd ~/src/vim"
+    #   sh "./configure --enable-multibyte --with-features=huge --enable-pythoninterp --enable-rubyinterp --enable-fontset"
+    #   sh "make"
+    #   sh "make install"
+    # end
+  end
+end
+
 namespace :svn do
   desc "コミット時に$id$を更新するようなSVNコンフィグ設定例を標準出力します。"
   task(:print_config){print_svn_config(SVN_CONFIG_PATH)}
