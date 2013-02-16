@@ -1,5 +1,8 @@
 "= NeoBundle一覧
 
+"-----------------------------------------------------------------------------
+" プラグイン
+"-----------------------------------------------------------------------------
 filetype off
 
 if has('vim_starting')
@@ -9,7 +12,7 @@ endif
 
 let g:neobundle_default_git_protocol = 'http'
 
-" 全般 {
+" 基本プラグイン
 NeoBundle 'Shougo/neobundle.vim.git'
 NeoBundle 'Shougo/neocomplcache.git'
 NeoBundle 'Shougo/neosnippet'
@@ -48,15 +51,10 @@ NeoBundle 'vim-scripts/DirDiff.vim.git'
 NeoBundle 'vim-scripts/DirDo.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides.git'
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'mattn/zencoding-vim.git'
-NeoBundle 'vim-scripts/xmledit.git'
 NeoBundle 'h1mesuke/vim-alignta.git'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'taku-o/vim-toggle.git'
-NeoBundle 'groenewege/vim-less.git'
 NeoBundle 'vim-scripts/jade.vim.git'
-NeoBundle 'vim-scripts/jQuery.git'
-NeoBundle 'kchmck/vim-coffee-script.git'
 NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'kana/vim-textobj-user.git'
 NeoBundle 'kana/vim-textobj-syntax.git'
@@ -65,7 +63,6 @@ NeoBundle 'kana/vim-textobj-indent.git'
 NeoBundle 'kana/vim-textobj-function.git'
 NeoBundle 'kana/vim-textobj-fold.git'
 NeoBundle 'thinca/vim-textobj-plugins.git'
-NeoBundle 'rhysd/vim-textobj-ruby.git'
 NeoBundle 'vim-scripts/textobj-entire.git'
 NeoBundle 'vim-scripts/textobj-jabraces.git'
 NeoBundle 'vim-scripts/operator-user.git'
@@ -81,32 +78,35 @@ NeoBundle 'yuroyoro/vim-autoclose.git'
 NeoBundle 'yuroyoro/yuroyoro256.vim'
 NeoBundle 'mattn/webapi-vim.git'
 NeoBundle 'mattn/excitetranslate-vim', {'depends': 'mattn/webapi-vim'}
-" }
+NeoBundle 'vim-scripts/matchit.zip.git'
 
-" JavaScript {
+" 開発系プラグイン
+NeoBundle 'rhysd/vim-textobj-ruby.git'
+NeoBundle 'vim-scripts/jQuery.git'
+NeoBundle 'groenewege/vim-less.git'
+NeoBundle 'vim-scripts/xmledit.git'
+NeoBundle 'mattn/zencoding-vim.git'
+NeoBundle 'tpope/vim-endwise.git'
+NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'kchmck/vim-coffee-script.git'
 NeoBundle 'teramako/jscomplete-vim.git'
 NeoBundle 'vim-scripts/JavaScript-syntax.git'
-" }
-
-" Ruby {
-NeoBundle 'vim-scripts/matchit.zip.git'
 NeoBundle 'vim-scripts/ruby-matchit.git'
 NeoBundle 'taichouchou2/vim-ref-ri'
 NeoBundle 'vim-ruby/vim-ruby.git'
-NeoBundle 'tpope/vim-endwise.git'
-NeoBundle 'vim-scripts/dbext.vim'
 NeoBundle 'taichouchou2/vim-rails'
 NeoBundle 'romanvbabenko/rails.vim'
 NeoBundle 'taq/vim-rspec'
 NeoBundle 'ujihisa/unite-rake'
 NeoBundle 'basyura/unite-rails.git'
-NeoBundle 'taichouchou2/vim-rsense'
 NeoBundle 'rhysd/unite-ruby-require.vim.git'
-" }
 
 syntax enable
 filetype plugin indent on
 
+"-----------------------------------------------------------------------------
+" Vim本体の設定
+"-----------------------------------------------------------------------------
 set t_Co=256
 set laststatus=2                                  " 常にステータスラインを表示する
 set ambiwidth=double                              " vimに全角を解釈させる
@@ -147,14 +147,15 @@ set ttymouse=xterm2
 set whichwrap=b,s,h,l,<,>,[,]
 set foldenable!
 hi Pmenu ctermbg=4
-
-au BufRead,BufNewFile *.snip  set filetype=snippet
-au BufRead,BufNewFile *.md  set filetype=markdown
+au BufRead,BufNewFile *.snip        set filetype=snippet
+au BufRead,BufNewFile *.md          set filetype=markdown
 au BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 
-" --------------------
+"-----------------------------------------------------------------------------
+" プラグイン毎の設定
+"-----------------------------------------------------------------------------
 " yuroyoro256.vim
-" --------------------
+"
 colorscheme yuroyoro256
 
 " ターミナルタイプによるカラー設定
@@ -175,42 +176,30 @@ endif
 
 hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg=#f0e68c
 
-
-" --------------------
 " QuickRun
-" --------------------
+"
 let g:quickrun_config = {}
 
-
-" --------------------
 " neocomplcache
-" --------------------
+"
 let g:neocomplcache_enable_at_startup = 1
 
-
-" --------------------
 " zen-coding
-" --------------------
+"
 let g:user_zen_settings = {'indentation' : '  '}
 
-
-" --------------------
 " vimfiler
-" --------------------
+"
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_as_default_explorer=1
 
-
-" --------------------
 " vimshell
-" --------------------
+"
 let vimshell_prompt = '$ '
 let vimshell_user_prompt = '"" . getcwd() . ""'
 
-
-" --------------------
 " Snippet
-" --------------------
+"
 let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
 " <TAB>: completion.                                         
@@ -230,10 +219,8 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-
-" --------------------
 " tcomment
-" --------------------
+"
 let g:tcommentMapLeader1 = '<C-_>'
 let g:tcommentMapLeader2 = '<Leader>'
 let g:tcommentMapLeaderOp1 = 'gc'
@@ -249,10 +236,8 @@ let g:tcomment_types = {
       \'eruby_surround_equality' : "<%%= %s %%>",
 \}
 
-
-" --------------------
 " ctags
-" --------------------
+"
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 let g:SrcExpl_updateTagsCmd = "/usr/local/bin/ctags --sort=foldcase -R ."
 if has("cscope")
@@ -269,10 +254,8 @@ if has("cscope")
   set cscopequickfix=s-,c-,d-,i-,t-,e-
 endif
 
-
-"--------------------
 " Switch
-"--------------------
+"
 nnoremap + :Switch<CR>e
 let g:switch_definitions =
 \ [
@@ -283,7 +266,11 @@ let g:switch_definitions =
 \   ['should', 'should_not']
 \ ]
 
+"-----------------------------------------------------------------------------
+" マッピング
+"-----------------------------------------------------------------------------
 " カーソル上下移動時に文の折り返しを考慮しない
+"
 nnoremap j gj
 onoremap j gj
 xnoremap j gj
@@ -292,6 +279,7 @@ onoremap k gk
 xnoremap k gk
 
 " ウィンドウ移動
+"
 nnoremap sh <C-w>h
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
@@ -302,6 +290,7 @@ nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 
 " バッファ移動
+"
 nnoremap <C-n> :<C-u>bnext<CR>
 nnoremap <C-p> :<C-u>bprevious<CR>
 
@@ -315,10 +304,12 @@ nnoremap <ESC><ESC> :nohlsearch<CR>
 vnoremap v $h
 
 " インサートモードでEmacsライクに移動
+"
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " ウィンドウ幅調整
+"
 nnoremap <C-h> <C-w><
 nnoremap <C-j> <C-w>+
 nnoremap <C-k> <C-w>-
