@@ -79,7 +79,6 @@ NeoBundle 'vim-scripts/Source-Explorer-srcexpl.vim'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'yuroyoro/vim-autoclose.git'
 NeoBundle 'yuroyoro/yuroyoro256.vim'
-NeoBundle 'yuratomo/w3m.vim.git'
 NeoBundle 'mattn/webapi-vim.git'
 NeoBundle 'mattn/excitetranslate-vim', {'depends': 'mattn/webapi-vim'}
 " }
@@ -105,41 +104,8 @@ NeoBundle 'taichouchou2/vim-rsense'
 NeoBundle 'rhysd/unite-ruby-require.vim.git'
 " }
 
-" Haskell {
-NeoBundle 'dag/vim2hs.git'
-NeoBundle 'eagletmt/ghcmod-vim.git'
-NeoBundle 'pbrisbin/html-template-syntax.git'
-NeoBundle 'ujihisa/neco-ghc'
-NeoBundle 'eagletmt/unite-haddock.git'
-NeoBundle 'ujihisa/ref-hoogle'
-" }
-
-" Scala {
-NeoBundle 'derekwyatt/vim-scala.git'
-" }
-
-" RedMine {
-NeoBundle 'kana/vim-metarw.git'
-NeoBundle 'mattn/vim-metarw-redmine.git'
-" }
-
-" Twitter {
-NeoBundle 'basyura/bitly.vim.git'
-NeoBundle 'basyura/TweetVim.git'
-NeoBundle 'basyura/twibill.vim.git'
-NeoBundle 'h1mesuke/unite-outline.git'
-NeoBundle 'yomi322/neco-tweetvim.git'
-NeoBundle 'yomi322/unite-tweetvim.git'
-" }
-
-" Lingr {
-NeoBundle 'tsukkee/lingr-vim.git'
-" }
-
 syntax enable
 filetype plugin indent on
-
-"= 基本設定
 
 set t_Co=256
 set laststatus=2                                  " 常にステータスラインを表示する
@@ -169,7 +135,7 @@ set smarttab
 set textwidth=0                                   " 自動折り返しをしない
 set background=light
 set clipboard=unnamed
-set timeoutlen=300                                " KeyMapタイムアウト待ち時間
+set timeoutlen=1000                               " KeyMapタイムアウト待ち時間
 set incsearch                                     " [検索]入力の度に検索する
 set nowrapscan                                    " [検索]先頭にループしない
 set hlsearch                                      " [検索]文字をハイライトする
@@ -185,8 +151,6 @@ hi Pmenu ctermbg=4
 au BufRead,BufNewFile *.snip  set filetype=snippet
 au BufRead,BufNewFile *.md  set filetype=markdown
 au BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-
-"= プラグイン用設定
 
 " --------------------
 " yuroyoro256.vim
@@ -319,9 +283,7 @@ let g:switch_definitions =
 \   ['should', 'should_not']
 \ ]
 
-"= マッピング定義
-
-" カーソルの上下移動時に文の折り返しを考慮しない
+" カーソル上下移動時に文の折り返しを考慮しない
 nnoremap j gj
 onoremap j gj
 xnoremap j gj
@@ -329,88 +291,7 @@ nnoremap k gk
 onoremap k gk
 xnoremap k gk
 
-" <ESC>連打で検索結果を削除
-nnoremap <ESC><ESC> :nohlsearch<CR>
-
-
-"--------------------
-" ビジュアルモード
-"--------------------
-vnoremap <Space> :Alignta<Space>
-vnoremap <silent> <C-p> "0p<CR>
-
-" 改行を含まない1行を選択
-vnoremap v $h
-
-
-"--------------------
-" インサートモード
-"--------------------
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-b> <C-o>O
-inoremap <C-f> <C-o>o
-inoremap <C-d> <Del>
-
-" アンドゥ
-inoremap <C-z> <ESC>ui
-
-" ブロック単位でフォーマット
-inoremap <C-x> <ESC>mzvip=`za
-
-" 入力位置を中央へ移動
-inoremap <C-g> <ESC>zza
-
-" Snippet
-inoremap <C-j> <ESC>:<C-u>Unite snippet -start-insert<CR>
-
-"--------------------
-" Control
-"--------------------
-nnoremap <C-h> <C-w><
-nnoremap <C-j> <C-w>+
-nnoremap <C-k> <C-w>-
-nnoremap <C-l> <C-w>>
-nnoremap <C-n> :<C-u>bnext<CR>
-nnoremap <C-p> :<C-u>bprevious<CR>
-
-
-"--------------------
-" f
-"--------------------
-nnoremap f, :<C-u>edit $HOME/.vimrc<CR>
-nnoremap f,a :<C-u>edit $HOME/.vimrc.basic<CR>
-nnoremap f,b :<C-u>edit $HOME/.vimrc.bundle<CR>
-nnoremap f,p :<C-u>edit $HOME/.vimrc.plugin<CR>
-nnoremap f,m :<C-u>edit $HOME/.vimrc.mapping<CR>
-nnoremap f,l :<C-u>edit $HOME/.vimrc.local<CR>
-nnoremap f. :<C-u>source $HOME/.vimrc<CR>
-nnoremap fh ^
-vnoremap fh ^
-nnoremap fl $
-vnoremap fl $<Left>
-nnoremap <silent> f :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file file_rec<CR>
-nnoremap <silent> fr :<C-u>Unite file_rec -start-insert<CR>
-nnoremap <silent> ff :<C-u>Unite file -start-insert<CR>
-nnoremap <silent> f<Space> :<C-u>Unite buffer -start-insert<CR>
-nnoremap <silent> fm :<C-u>Unite tag -start-insert<CR>
-nnoremap <silent> fs :<C-u>Unite snippet<CR>
-nnoremap <silent> fj :<C-u>VimFilerBufferDir<CR>
-nnoremap <silent> fJ :<C-u>VimFilerBufferDir -split<CR>
-nnoremap <silent> fk :<C-u>VimShellPop<CR>
-nnoremap <silent> fo <C-w>f
-nnoremap <silent> fO <C-w><C-f>
-nnoremap <silent> fe :<C-u>VimFilerExplorer<CR>
-nmap <silent> fw <Plug>(openbrowser-smart-search)
-vmap <silent> fw <Plug>(openbrowser-smart-search)
-nnoremap fv :<C-u>VCSVimDiff<CR>
-nnoremap fd :<C-u>VCSDiff<CR>
-nnoremap fc :<C-u>VCSCommit<CR>
-
-
-"--------------------
-" s
-"--------------------
+" ウィンドウ移動
 nnoremap sh <C-w>h
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
@@ -419,60 +300,78 @@ nnoremap sH <C-w>H
 nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
-nnoremap sdh <C-w>h:<C-u>bd!<CR>
-nnoremap sdj <C-w>j:<C-u>bd!<CR>
-nnoremap sdk <C-w>k:<C-u>bd!<CR>
-nnoremap sdl <C-w>l:<C-u>bd!<CR>
-nnoremap <silent> sp :<C-u>set paste!<CR>
-nnoremap <silent> sn :<C-u>set nu!<CR>
-nnoremap <silent> sr :<C-u>set readonly!<CR>
-nnoremap sf :<C-u>set filetype=
-nnoremap sfr :<C-u>set filetype=ruby<CR>
-nnoremap sfrs :<C-u>set filetype=ruby.rspec<CR>
-nnoremap sfv :<C-u>set filetype=vim<CR>
-nnoremap sfhs :<C-u>set filetype=haskell<CR>
-nnoremap sfh :<C-u>set filetype=html<CR>
-nnoremap sfc :<C-u>set filetype=coffee<CR>
-nnoremap sfj :<C-u>set filetype=javascript<CR>
-nnoremap sfm :<C-u>set filetype=markdown<CR>
-nnoremap <silent> s<Space> :<C-u>QuickRun<CR>
-nnoremap sa<Space> :<C-u>QuickRun -args ""<Left>
 
+" バッファ移動
+nnoremap <C-n> :<C-u>bnext<CR>
+nnoremap <C-p> :<C-u>bprevious<CR>
 
-"--------------------
-" t
-"--------------------
-nnoremap tt :<C-u>W3m google 
-nnoremap ta :<C-u>W3m alc 
+" ペースト時にヤンクしない
+vnoremap <silent> <C-p> "0p<CR>
 
+" 検索結果のハイライトを消す
+nnoremap <ESC><ESC> :nohlsearch<CR>
 
-"--------------------
-" Enter
-"--------------------
-nnoremap <silent> <CR>s :<C-u>new<CR>
-nnoremap <silent> <CR>v :<C-u>vnew<CR>
-nnoremap <silent> <CR>S :<C-u>split<CR>
-nnoremap <silent> <CR>V :<C-u>vsplit<CR>
-nnoremap <silent> <CR>V :<C-u>vsplit<CR>
-nnoremap <silent> <CR>d :<C-u>bd!<CR>
-nnoremap <silent> <CR>q :<C-u>q!<CR>
-nnoremap <silent> <CR><Space> :<C-u>SyntasticCheck<CR>
-nnoremap <silent> <CR>h :<C-u>hide<CR>
+" ノーマルモードでvvで末尾まで選択
+vnoremap v $h
 
+" インサートモードでEmacsライクに移動
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 
-"--------------------
-" Space
-"--------------------
-nnoremap <Space>  :<C-u>Unite rails/
-nnoremap <Space>h :<C-u>Unite rails/helper -start-insert=1<CR>
-nnoremap <Space>m :<C-u>Unite rails/model -start-insert=1<CR>
-nnoremap <Space>v :<C-u>Unite rails/view -start-insert=1<CR>
-nnoremap <Space>c :<C-u>Unite rails/controller -start-insert=1<CR>
-nnoremap <Space>l :<C-u>Unite rails/lib -start-insert=1<CR>
-nnoremap <Space>s :<C-u>Unite rails/spec -start-insert=1<CR>
-nnoremap <Space>o :<C-u>Unite rails/config -start-insert=1<CR>
-nnoremap <Space>r :<C-u>Unite rails/rake -start-insert=1<CR>
-nnoremap <Space>L :<C-u>Unite rails/log -start-insert=1<CR>
+" ウィンドウ幅調整
+nnoremap <C-h> <C-w><
+nnoremap <C-j> <C-w>+
+nnoremap <C-k> <C-w>-
+nnoremap <C-l> <C-w>>
 
-"ローカル設定
-source ~/.vimrc.local
+" nnoremap KEY :<C-u>edit $HOME/.vimrc<CR>
+" nnoremap KEY :<C-u>edit $HOME/.vimrc.local<CR>
+" nnoremap KEY :<C-u>source $HOME/.vimrc<CR>
+" nnoremap KEY :<C-u>VCSVimDiff<CR>
+" nnoremap KEY :<C-u>VCSDiff<CR>
+" nnoremap KEY :<C-u>VCSCommit<CR>
+" nnoremap <silent> KEY :<C-u>new<CR>
+" nnoremap <silent> KEY :<C-u>vnew<CR>
+" nnoremap <silent> KEY :<C-u>split<CR>
+" nnoremap <silent> KEY :<C-u>vsplit<CR>
+" nnoremap <silent> KEY :<C-u>bd!<CR>
+" nnoremap <silent> KEY :<C-u>q!<CR>
+" nnoremap <silent> KEY :<C-u>hide<CR>
+" nnoremap <silent> KEY :<C-u>set paste!<CR>
+" nnoremap <silent> KEY :<C-u>set nu!<CR>
+" nnoremap <silent> KEY :<C-u>set readonly!<CR>
+" nnoremap <silent> KEY <C-w>f
+" nnoremap <silent> KEY <C-w><C-f>
+" vnoremap KEY :Alignta<Space>
+" nnoremap <silent> KEY :<C-u>VimFilerBufferDir<CR>
+" nnoremap <silent> KEY :<C-u>VimFilerBufferDir -split<CR>
+" nnoremap <silent> KEY :<C-u>VimFilerExplorer<CR>
+" nnoremap <silent> KEY :<C-u>VimShellPop<CR>
+" nnoremap <silent> KEY :<C-u>QuickRun<CR>
+" nnoremap <silent> KEY :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file file_rec<CR>
+" nnoremap <silent> KEY :<C-u>Unite file_rec -start-insert<CR>
+" nnoremap <silent> KEY :<C-u>Unite file -start-insert<CR>
+" nnoremap <silent> KEY :<C-u>Unite buffer -start-insert<CR>
+" nnoremap <silent> KEY :<C-u>Unite tag -start-insert<CR>
+" nnoremap <silent> KEY :<C-u>Unite snippet<CR>
+" nnoremap KEY :<C-u>Unite rails/
+" nnoremap KEY :<C-u>Unite rails/helper -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/model -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/view -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/controller -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/lib -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/spec -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/config -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/rake -start-insert=1<CR>
+" nnoremap KEY :<C-u>Unite rails/log -start-insert=1<CR>
+" nnoremap KEY :<C-u>set filetype=
+" nnoremap KEY :<C-u>set filetype=ruby<CR>
+" nnoremap KEY :<C-u>set filetype=ruby.rspec<CR>
+" nnoremap KEY :<C-u>set filetype=vim<CR>
+" nnoremap KEY :<C-u>set filetype=haskell<CR>
+" nnoremap KEY :<C-u>set filetype=html<CR>
+" nnoremap KEY :<C-u>set filetype=coffee<CR>
+" nnoremap KEY :<C-u>set filetype=javascript<CR>
+" nnoremap KEY :<C-u>set filetype=markdown<CR>
+
+source $HOME/.vimrc.local
