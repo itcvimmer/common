@@ -50,12 +50,9 @@ namespace :svn do
     exit_unless_file_exist(SVN_CONFIG_PATH)
     file_str = File.read(SVN_CONFIG_PATH)
     file_str.gsub!(/^# enable-auto-props = yes$/,"enable-auto-props = yes")
-    SVN_CONFIG_FILETYPES
-      .map{|_|"*.#{_}"}
-      .reject{|_|file_str.match(/^#{additional_keywords(Regexp.escape(_))}/)}
-      .reverse.each do |_|
-        file_str.gsub!(/^\[auto-props\]$/,"[auto-props]\n#{additional_keywords(_)}")
-      end
+    SVN_CONFIG_FILETYPES.map{|_|"*.#{_}"}.reject{|_|file_str.match(/^#{additional_keywords(Regexp.escape(_))}/)}.reverse.each do |_|
+      file_str.gsub!(/^\[auto-props\]$/,"[auto-props]\n#{additional_keywords(_)}")
+    end
     print file_str
   end
 end
