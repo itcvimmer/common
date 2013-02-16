@@ -131,7 +131,7 @@ task(:default){print USAGE}
 
 namespace :vim do
   desc "[副作用] 共通vimの設定ファイルのシンボリックリンクを張り、neobundleプラグインを入れ、NeoBundleInstallを実行します。"
-  task :install_common_setting => %w(vim:symlink vim:touch vim:clone_neobundle vim:neobundleinstall)
+  task :setup => %w(vim:symlink vim:touch vim:clone_neobundle vim:neobundleinstall)
   sub_task(:symlink){link_to_home %w(.vimrc .vim)}
   sub_task(:touch){touch "#{ENV['HOME']}/.vimrc.local"}
   sub_task(:clone_neobundle){clone_neobundle(VIM_BUNDLE_PATH)}
