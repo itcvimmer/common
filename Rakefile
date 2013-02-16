@@ -141,6 +141,24 @@ end
 namespace :install do
   desc "[副作用] gitからrvmをcloneしてinstallを実行します。"
   task(:rvm){install_rvm(ENV['HOME'])}
+
+  #TODO
+  # desc "[副作用] rubyリファレンスマニュアルの設定"
+  # task(:rubyrefm) do
+  #   src_dir="/usr/local/src"
+  #   rubyrefm_dir="#{src_dir}/rubyrefm/"
+  #   refe_exe="/usr/local/bin/refe"
+  #   sh "wget -P #{src_dir} http://doc.okkez.net/archives/201208/ruby-refm-1.9.3-dynamic-20120829.tar.gz"
+  #   sh "tar xvzf #{src_dir}/ruby-refm-1.9.3-dynamic-20120829.tar.gz -C #{src_dir}"
+  #   sh "mv -f #{src_dir}/ruby-refm-1.9.3-dynamic-20120829 #{src_dir}/rubyrefm"
+  #   sh %Q[
+  #   cat <<-EOF > #{refe_exe}
+  #   #!/bin/sh
+  #   exec ruby -Ke -I #{rubyrefm_dir}/bitclust/lib #{rubyrefm_dir}/bitclust/bin/refe -d #{rubyrefm_dir}/db-1_9_3 "\$@"
+  #   EOF
+  #   ]
+  #   sh "chmod 755 #{refe_exe}"
+  # end
 end
 
 namespace :svn do
