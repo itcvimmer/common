@@ -6,9 +6,7 @@ USAGE = <<-EOF
 ------------------------------------------
 クイックスタートガイド
 ------------------------------------------
-なにはともあれ`rake -T`を実行してください。
-
-説明が
+説明(`rake -T`で表示)が
   [副作用]を含む場合 => ファイルの変更があります。注意して実行してください。
   "--"の場合         => 他のタスクから呼ばれるタスクなので、通常は単体で呼ばれることはないタスクです。
 EOF
@@ -27,7 +25,7 @@ def define_wget_to_stdout_task(name, repository, files)
   namespace name do
     namespace :print do
       files.each do |_|
-        desc "個人で管理している#{_}を標準出力します。"
+        desc "[#{name}] #{_}を標準出力します。[レポジトリ:#{repository}]"
         task _ do
           verbose false do
             sh wgetp("https://raw.github.com/#{name}/#{repository}/master/#{_}")
