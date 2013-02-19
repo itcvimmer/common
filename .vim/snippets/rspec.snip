@@ -153,7 +153,9 @@ abbr    should_not be_isntance_of(xxx)
 snippet shre
 options word
 abbr    should raise_error(xxx)
-        should raise_error(${0})
+        lambda{${1}}.should raise_error(${2}) {|ex|
+          ex.error_type.should == :${0}
+        }
 
 snippet shnre
 options word
